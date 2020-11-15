@@ -5,6 +5,8 @@ import id.co.alamisharia.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ProductService {
     @Autowired
@@ -12,6 +14,10 @@ public class ProductService {
 
     public Product saveProduct(Product product) {
         return repository.save(product);
+    }
+
+    public List<Product> getProductsBySellerId(int sellerId) {
+        return repository.findBySellerId(sellerId);
     }
 
 }
