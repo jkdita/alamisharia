@@ -16,8 +16,12 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public List<Product> getProductsBySellerId(int sellerId) {
+    public List<Product> listProductBySellerId(int sellerId) {
         return repository.findBySellerId(sellerId);
+    }
+
+    public List<Product> searchProductByKeyword(String keyword) {
+        return repository.findByNamaContains(keyword);
     }
 
 }

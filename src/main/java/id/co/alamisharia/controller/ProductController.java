@@ -18,7 +18,12 @@ public class ProductController {
     }
 
     @GetMapping("/listProductBySellerId")
-    public List<Product> getProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
-        return service.getProductsBySellerId(sellerId);
+    public List<Product> listProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
+        return service.listProductBySellerId(sellerId);
+    }
+
+    @GetMapping("/searchProductByKeyword")
+    public List<Product> searchProductByKeyword(@RequestParam("keyword") String keyword) {
+        return service.searchProductByKeyword(keyword);
     }
 }
