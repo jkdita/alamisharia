@@ -1,6 +1,6 @@
 curl -X POST localhost:8080/shutdown
 sleep 5
-PID=$(ps -eo pid,command | grep alamisharia-rest-api-0.0.1-SNAPSHOT.jar| grep -v grep | awk '{print $1}')
+PID=$(ps -eo pid,command | grep alamisharia-rest-api.jar| grep -v grep | awk '{print $1}')
 if [ -z $PID ];
 then
 echo "alamisharia rest api is stopped"
