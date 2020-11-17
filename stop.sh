@@ -1,4 +1,4 @@
-curl -X POST localhost:8080/shutdown
+curl -X GET localhost:8080/shutdown
 sleep 5
 PID=$(ps -eo pid,command | grep alamisharia-rest-api.jar| grep -v grep | awk '{print $1}')
 if [ -z $PID ];
