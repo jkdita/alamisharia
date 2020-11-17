@@ -7,7 +7,7 @@
    - Framework : Spring Boot
    
 ## Postman Documentation
-```sh
+```
 https://www.getpostman.com/collections/eae70952d07e338338c0
 ```
 
@@ -15,6 +15,10 @@ https://www.getpostman.com/collections/eae70952d07e338338c0
   - HTTP
 
 ## How To Deploy
+### Database
+```mysql
+CREATE DATABASE alamisharia CHARACTER SET utf8 COLLATE utf8_general_ci;
+```
 ### Local
 Build
 ```sh
