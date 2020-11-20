@@ -4,8 +4,11 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import org.springframework.format.annotation.NumberFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -20,5 +23,8 @@ public class Product {
     private int sellerId;
     private String nama;
     private String satuan;
+
+    @Min(1)
+    @NumberFormat
     private double hargaSatuan;
 }

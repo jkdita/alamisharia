@@ -5,8 +5,11 @@ import id.co.alamisharia.entity.Response;
 import id.co.alamisharia.service.ProductService;
 import id.co.alamisharia.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +21,16 @@ public class ProductController {
     private SellerService sellerService;
 
     @PostMapping("/addProduct")
-    public Response addProduct(@RequestBody Product product) {
+    public Response addProduct(@Valid @RequestBody Product product, Errors errors) { //@RequestBody Product product) {
+        if(errors.hasErrors()) {
+            List<String> errMsg = new ArrayList<>();
+            errors.getAllErrors().forEach(o -> {
+                errMsg.add(o.getDefaultMessage());
+            });
+
+            return new Response(400, "Error", errMsg.toString());
+        }
+
         if(service.existsById(product.getId())) {
             return new Response(400, "Error", "Product already exist!");
         }
