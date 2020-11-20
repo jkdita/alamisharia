@@ -46,13 +46,25 @@ public class ProductController {
 
     @GetMapping("/listProductBySellerId")
     public Response listProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
-        List<Product> result = service.listProductBySellerId(sellerId);
+        if(!sellerService.existsById(sellerId)) {
+            return new Response(400, "Error", "Seller not found!");
+        }
+
+        List<Product> result;
+        result = service.listProductBySellerId(sellerId);
+        if (result.size() < 1) {
+            return new Response(400, "Error", "Product not found!");
+        }
         return new Response(200, "Success", "", result);
     }
 
     @GetMapping("/searchProductByKeyword")
     public Response searchProductByKeyword(@RequestParam("keyword") String keyword) {
-        List<Product> result = service.searchProductByKeyword(keyword);
+        List<Product> result;
+        result = service.searchProductByKeyword(keyword);
+        if (result.size() < 1) {
+            return new Response(400, "Error", "Product not found!");
+        }
         return new Response(200, "Success", "", result);
     }
 }
