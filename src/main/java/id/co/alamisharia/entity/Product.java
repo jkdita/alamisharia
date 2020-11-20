@@ -1,10 +1,6 @@
 package id.co.alamisharia.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.springframework.format.annotation.NumberFormat;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -23,11 +19,12 @@ public class Product {
     private int sellerId;
 
     @NonNull
-    @NotBlank(message = "Nama is mandatory")
+    @NotBlank(message = "nama is mandatory")
     private String nama;
 
     private String satuan;
 
     @Min(1)
+    @NotNull
     private double hargaSatuan;
 }

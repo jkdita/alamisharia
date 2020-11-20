@@ -5,6 +5,7 @@ import id.co.alamisharia.entity.Response;
 import id.co.alamisharia.service.ProductService;
 import id.co.alamisharia.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +22,7 @@ public class ProductController {
     private SellerService sellerService;
 
     @PostMapping("/addProduct")
-    public Response addProduct(@Valid @RequestBody Product product, Errors errors) { //@RequestBody Product product) {
+    public Response addProduct(@Valid @RequestBody Product product, Errors errors) {
         if(errors.hasErrors()) {
             List<String> errMsg = new ArrayList<>();
             errors.getAllErrors().forEach(o -> {
