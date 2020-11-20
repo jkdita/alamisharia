@@ -9,4 +9,6 @@ public interface ProductRepository extends JpaRepository<Product, Integer> {
     List<Product> findBySellerId(int sellerId);
 
     List<Product> findByNamaContains(String keyword);
+
+    boolean existsByNama(String nama);
 }

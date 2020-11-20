@@ -14,6 +14,10 @@ import javax.persistence.*;
 public class Seller {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(length = 50)
     private String nama;
+
+    @Column(length = 50)
     private String kota;
 }

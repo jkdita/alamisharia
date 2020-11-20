@@ -20,6 +20,10 @@ public class ProductService {
         return repository.existsById(id);
     }
 
+    public boolean existsByNama(String nama) {
+        return repository.existsByNama(nama);
+    }
+
     public List<Product> listProductBySellerId(int sellerId) {
         return repository.findBySellerId(sellerId);
     }

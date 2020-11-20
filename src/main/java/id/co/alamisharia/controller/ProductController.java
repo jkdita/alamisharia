@@ -32,7 +32,7 @@ public class ProductController {
             return new Response(400, "Error", errMsg.toString());
         }
 
-        if(service.existsById(product.getId())) {
+        if(service.existsById(product.getId()) || service.existsByNama(product.getNama())) {
             return new Response(400, "Error", "Product already exist!");
         }
 

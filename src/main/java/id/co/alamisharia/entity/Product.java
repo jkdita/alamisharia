@@ -20,8 +20,10 @@ public class Product {
 
     @NonNull
     @NotBlank(message = "nama is mandatory")
+    @Column(unique=true, length = 50)
     private String nama;
 
+    @Column(length = 15)
     private String satuan;
 
     @Min(1)
