@@ -1,6 +1,7 @@
 package id.co.alamisharia.controller;
 
 import id.co.alamisharia.entity.Product;
+import id.co.alamisharia.entity.Response;
 import id.co.alamisharia.service.ProductService;
 import id.co.alamisharia.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,27 +18,28 @@ public class ProductController {
     private SellerService sellerService;
 
     @PostMapping("/addProduct")
-    public Product addProduct(@RequestBody Product product) {
+    public Response addProduct(@RequestBody Product product) {
         if(service.existsById(product.getId())) {
-            product.setNama("Sudah Ada"); //TODO create general response body
-            return product;
+            return new Response(400, "Error", "Product already exist!");
         }
 
         if(!sellerService.existsById(product.getSellerId())) {
-            product.setNama("ID Seller Tidak Ada Di DB"); //TODO create general response body
-            return product;
+            return new Response(400, "Error", "Seller not found!");
         }
 
-        return service.saveProduct(product);
+        Product result = service.saveProduct(product);
+        return new Response(200, "Success", "", result);
     }
 
     @GetMapping("/listProductBySellerId")
-    public List<Product> listProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
-        return service.listProductBySellerId(sellerId);
+    public Response listProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
+        List<Product> result = service.listProductBySellerId(sellerId);
+        return new Response(200, "Success", "", result);
     }
 
     @GetMapping("/searchProductByKeyword")
-    public List<Product> searchProductByKeyword(@RequestParam("keyword") String keyword) {
-        return service.searchProductByKeyword(keyword);
+    public Response searchProductByKeyword(@RequestParam("keyword") String keyword) {
+        List<Product> result = service.searchProductByKeyword(keyword);
+        return new Response(200, "Success", "", result);
     }
 }

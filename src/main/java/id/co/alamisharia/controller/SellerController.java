@@ -1,5 +1,6 @@
 package id.co.alamisharia.controller;
 
+import id.co.alamisharia.entity.Response;
 import id.co.alamisharia.entity.Seller;
 import id.co.alamisharia.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,11 +12,12 @@ public class SellerController {
     private SellerService service;
 
     @PostMapping("/addSeller")
-    public Seller addSeller(@RequestBody Seller seller) {
+    public Response addSeller(@RequestBody Seller seller) {
         if(service.existsById(seller.getId())) {
-            seller.setNama("Sudah Ada"); //TODO create general response body
-            return seller;
+            return new Response(400, "Error", "Seller already exist!");
         }
-        return service.saveSeller(seller);
+
+        Seller result = service.saveSeller(seller);
+        return new Response(200, "Success", "", result);
     }
 }
