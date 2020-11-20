@@ -13,4 +13,8 @@ public class SellerService {
     public Seller saveSeller(Seller seller) {
         return repository.save(seller);
     }
+
+    public boolean existsById(int id) {
+        return repository.existsById(id);
+    }
 }

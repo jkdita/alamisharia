@@ -16,6 +16,10 @@ public class ProductService {
         return repository.save(product);
     }
 
+    public boolean existsById(int id) {
+        return repository.existsById(id);
+    }
+
     public List<Product> listProductBySellerId(int sellerId) {
         return repository.findBySellerId(sellerId);
     }

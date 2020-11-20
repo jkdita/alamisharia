@@ -12,6 +12,10 @@ public class SellerController {
 
     @PostMapping("/addSeller")
     public Seller addSeller(@RequestBody Seller seller) {
+        if(service.existsById(seller.getId())) {
+            seller.setNama("Sudah Ada"); //TODO create general response body
+            return seller;
+        }
         return service.saveSeller(seller);
     }
 }
