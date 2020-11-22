@@ -137,7 +137,7 @@ public class ProductController {
         try {
             ResponseEnum response;
 
-            List<Product> products = service.searchProductByKeyword(keyword);
+            List<Product> products = service.searchProductByKeyword(keyword.trim());
             if (products.size() < 1) {
                 response = ResponseEnum.NOT_FOUND;
                 response.setMessage("Product Not Found!");
@@ -167,7 +167,7 @@ public class ProductController {
             if (keyword == null)
                 pageProducts = service.findAll(paging);
             else
-                pageProducts = service.findByKeywordContaining(keyword, paging);
+                pageProducts = service.findByKeywordContaining(keyword.trim(), paging);
 
             products = pageProducts.getContent();
 
