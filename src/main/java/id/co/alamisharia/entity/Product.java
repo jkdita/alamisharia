@@ -1,5 +1,6 @@
 package id.co.alamisharia.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
@@ -28,7 +29,19 @@ public class Product {
     private double hargaSatuan;
 
     @ManyToOne
-    @JoinColumn(name = "seller_id", nullable = false)
+    @JoinColumn(
+            name = "seller_id",
+            nullable = false,
+            foreignKey = @ForeignKey(
+                    name = "fk_product_seller_id"
+            ),
+            insertable = false,
+            updatable = false
+    )
+    @JsonIgnore
     private Seller seller;
+
+    @Column(name = "seller_id", nullable = false)
+    private long sellerId;
 
 }
