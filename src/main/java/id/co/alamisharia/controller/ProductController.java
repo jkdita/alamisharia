@@ -2,16 +2,14 @@ package id.co.alamisharia.controller;
 
 import id.co.alamisharia.entity.Product;
 import id.co.alamisharia.entity.Response;
-import id.co.alamisharia.entity.Seller;
 import id.co.alamisharia.service.ProductService;
 import id.co.alamisharia.service.SellerService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -25,12 +23,9 @@ public class ProductController {
     @PostMapping("/addProduct")
     public Response addProduct(@Valid @RequestBody Product product, Errors errors) {
         if(errors.hasErrors()) {
-            List<String> errMsg = new ArrayList<>();
-            errors.getAllErrors().forEach(o -> {
-                errMsg.add(o.getDefaultMessage());
-            });
-
-            return new Response(400, "Error", errMsg.toString());
+            FieldError fe = errors.getFieldError();
+            String em = fe.getField() + " " + fe.getDefaultMessage();
+            return new Response(400, "Error", em);
         }
 
         if(service.existsById(product.getId()) || service.existsByNama(product.getNama())) {
@@ -46,7 +41,7 @@ public class ProductController {
     }
 
     @GetMapping("/listProductBySellerId")
-    public Response listProductBySellerId(@RequestParam("SELLER_ID") int sellerId) {
+    public Response listProductBySellerId(@RequestParam("seller_id") int sellerId) {
         if(!sellerService.existsById(sellerId)) {
             return new Response(400, "Error", "Seller not found!");
         }
@@ -54,7 +49,7 @@ public class ProductController {
         List<Product> result;
         result = service.listProductBySellerId(sellerId);
         if (result.size() < 1) {
-            return new Response(400, "Error", "Product not found!");
+            return new Response(400, "Error", "Product of sales not found!");
         }
         return new Response(200, "Success", "", result);
     }

@@ -1,12 +1,13 @@
 package id.co.alamisharia.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,9 +21,13 @@ public class Seller {
     private long id;
 
     @Column(nullable = false, length = 50)
+    @Size(max = 50)
+    @NotBlank
     private String nama;
 
     @Column(nullable = false, length = 50)
+    @Size(max = 50)
+    @NotBlank
     private String kota;
 
     @JsonBackReference

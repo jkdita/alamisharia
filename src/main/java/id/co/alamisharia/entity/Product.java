@@ -1,7 +1,7 @@
 package id.co.alamisharia.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 
 import javax.persistence.*;
@@ -17,15 +17,21 @@ public class Product {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank(message = "nama is mandatory")
     @Column(nullable = false, unique = true, length = 50)
+    @NotBlank
+    @Size(max = 50)
     private String nama;
 
-    @Column(length = 15)
+    @Column(nullable = false, length = 15)
+    @NotBlank
+    @Size(max = 15)
     private String satuan;
 
-    @Min(1)
+
     @Column(name = "harga_satuan", nullable = false)
+    @DecimalMin(value = "1.0", inclusive = false)
+    @Digits(integer=3, fraction=2)
+    @JsonProperty("harga_satuan")
     private double hargaSatuan;
 
     @ManyToOne
@@ -42,6 +48,7 @@ public class Product {
     private Seller seller;
 
     @Column(name = "seller_id", nullable = false)
+    @JsonProperty("seller_id")
     private long sellerId;
 
 }
