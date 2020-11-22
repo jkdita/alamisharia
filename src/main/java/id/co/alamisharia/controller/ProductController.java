@@ -36,7 +36,7 @@ public class ProductController {
             return new Response(400, "Error", "Product already exist!");
         }
 
-        if(!sellerService.existsById(product.getSellerId())) {
+        if(!sellerService.existsById(product.getSeller().getId())) {
             return new Response(400, "Error", "Seller not found!");
         }
 
