@@ -29,9 +29,7 @@ public class Product {
 
 
     @Column(name = "harga_satuan", nullable = false)
-    @DecimalMin(value = "1.0", inclusive = false)
-    @Digits(integer=3, fraction=2)
-    @JsonProperty("harga_satuan")
+    @Min(1)
     private double hargaSatuan;
 
     @ManyToOne
@@ -48,7 +46,6 @@ public class Product {
     private Seller seller;
 
     @Column(name = "seller_id", nullable = false)
-    @JsonProperty("seller_id")
     private long sellerId;
 
 }
