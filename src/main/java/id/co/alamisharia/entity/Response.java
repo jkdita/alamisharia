@@ -2,6 +2,7 @@ package id.co.alamisharia.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
+import org.springframework.http.HttpStatus;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -22,6 +23,25 @@ public class Response {
 
     public Response(int code, String status, String message, Object data) {
         this(code, status, message);
+        this.data = data;
+    }
+
+    public Response(String message) {
+        this.code = HttpStatus.BAD_REQUEST.value();;
+        this.status = "Error";
+        this.message = message;
+    }
+
+    public Response(int code, String message) {
+        this.code = code;
+        this.status = "Error";
+        this.message = message;
+    }
+
+    public Response(Object data) {
+        this.code = HttpStatus.OK.value();
+        this.status = "Success";
+        this.message = "";
         this.data = data;
     }
 
