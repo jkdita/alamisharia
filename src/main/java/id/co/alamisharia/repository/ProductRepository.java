@@ -17,5 +17,5 @@ public interface ProductRepository  extends CrudRepository<Product, Long> {
 
     List<Product> findByNamaContains(String keyword);
 
-    boolean existsByNama(String nama);
+    boolean existsByIdOrAndNamaAndSellerId(long id, String nama, long sellerId);
 }

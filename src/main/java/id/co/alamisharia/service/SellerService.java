@@ -21,4 +21,8 @@ public class SellerService {
     public boolean existsById(long id) {
         return repository.existsById(id);
     }
+
+    public boolean existsByNama(String nama) {
+        return repository.existsByNama(nama);
+    }
 }

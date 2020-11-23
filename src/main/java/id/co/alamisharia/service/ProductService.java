@@ -22,8 +22,8 @@ public class ProductService {
         return repository.existsById(id);
     }
 
-    public boolean existsByNama(String nama) {
-        return repository.existsByNama(nama);
+    public boolean existsByIdOrAndNamaAndSellerId(long id, String nama, long sellerId) {
+        return repository.existsByIdOrAndNamaAndSellerId(id, nama, sellerId);
     }
 
     public List<Product> listProductBySellerId(long sellerId) {

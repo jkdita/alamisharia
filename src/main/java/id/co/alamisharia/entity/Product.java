@@ -11,13 +11,15 @@ import javax.validation.constraints.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "PRODUCT_TBL")
+@Table(name = "PRODUCT_TBL", uniqueConstraints = {
+        @UniqueConstraint(name = "uk_nama_seller_id", columnNames = {"nama", "seller_id"})
+})
 public class Product {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false, unique = true, length = 50)
+    @Column(nullable = false, length = 50)
     @NotBlank
     @NotEmpty
     @NotNull
@@ -53,5 +55,9 @@ public class Product {
     @NotNull
     @Column(name = "seller_id", nullable = false)
     private long sellerId;
+
+    @Column(length = 100)
+    @Size(max = 100)
+    private String deskripsi;
 
 }

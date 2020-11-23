@@ -62,7 +62,7 @@ public class ProductController {
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
 
-            if (service.existsById(product.getId()) || service.existsByNama(product.getNama().trim())) {
+            if (service.existsByIdOrAndNamaAndSellerId(product.getId(), product.getNama().trim(), product.getSellerId())) {
                 response = ResponseEnum.BAD_REQUEST;
                 response.setMessage("Product Already Exist");
                 return new ResponseEntity<>(response, HttpStatus.OK);

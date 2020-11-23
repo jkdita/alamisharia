@@ -45,7 +45,7 @@ public class SellerController {
                 return new ResponseEntity<>(response, HttpStatus.OK);
             }
 
-            if (service.existsById(seller.getId())) {
+            if (service.existsById(seller.getId()) || service.existsByNama(seller.getNama())) {
                 response = ResponseEnum.BAD_REQUEST;
                 response.setMessage("Seller Already Exist");
                 return new ResponseEntity<>(response, HttpStatus.OK);
