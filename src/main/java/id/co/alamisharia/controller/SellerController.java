@@ -17,22 +17,6 @@ public class SellerController {
     @Autowired
     private SellerService service;
 
-    /*@PostMapping("/addSeller")
-    public Response addSeller(@Valid @RequestBody Seller seller, Errors errors) {
-        if(errors.hasErrors()) {
-            FieldError fe = errors.getFieldError();
-            String em = fe.getField() + " " + fe.getDefaultMessage();
-            return new Response(400, "Error", em);
-        }
-
-        if(service.existsById(seller.getId())) {
-            return new Response(400, "Error", "Seller already exist!");
-        }
-
-        Seller result = service.saveSeller(seller);
-        return new Response(200, "Success", "", result);
-    }*/
-
     @PostMapping("/addSeller")
     public ResponseEntity<ResponseEnum> addSeller(@Valid @RequestBody Seller seller, Errors errors) {
         try {

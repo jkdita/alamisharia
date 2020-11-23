@@ -18,10 +18,6 @@ public class ProductService {
         return repository.save(product);
     }
 
-    public boolean existsById(long id) {
-        return repository.existsById(id);
-    }
-
     public boolean existsByIdOrAndNamaAndSellerId(long id, String nama, long sellerId) {
         return repository.existsByIdOrAndNamaAndSellerId(id, nama, sellerId);
     }

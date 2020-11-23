@@ -14,10 +14,6 @@ public class SellerService {
         return repository.save(seller);
     }
 
-    public Seller findById(long id) {
-        return repository.findById(id).orElse(null);
-    }
-
     public boolean existsById(long id) {
         return repository.existsById(id);
     }
