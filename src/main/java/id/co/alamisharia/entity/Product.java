@@ -19,16 +19,21 @@ public class Product {
 
     @Column(nullable = false, unique = true, length = 50)
     @NotBlank
+    @NotEmpty
+    @NotNull
     @Size(max = 50)
     private String nama;
 
     @Column(nullable = false, length = 15)
     @NotBlank
+    @NotEmpty
+    @NotNull
     @Size(max = 15)
     private String satuan;
 
 
     @Column(name = "harga_satuan", nullable = false)
+    @NotNull
     @Min(1)
     private double hargaSatuan;
 
@@ -45,6 +50,7 @@ public class Product {
     @JsonIgnore
     private Seller seller;
 
+    @NotNull
     @Column(name = "seller_id", nullable = false)
     private long sellerId;
 
